@@ -149,3 +149,27 @@ plotRandHist(X_train, 5660, 6, 1);
 plotRandHist(X_train_N, 5660, 6, 2);
 
 plt.show()
+
+### Generate additional data (OPTIONAL!)
+### how many examples per class?
+
+# according to review #1
+from collections import Counter
+
+counter = Counter(y_train)
+# </>
+
+# counter = np.zeros(n_classes, np.int32)
+factor = np.ones(n_classes, np.int32)
+# for i in range(len(y_train)):
+#    counter[y_train[i]]+=1
+
+for i in range(n_classes):
+    factor[i] = max(2000 / counter[i], 1)
+
+plt.figure(figsize=(14, 5))
+plt.subplot(2, 1, 1)
+plt.bar(np.arange(n_classes) - 0.5, counter.values())
+# plt.bar(np.arange(n_classes)-0.5, counter)
+plt.subplot(2, 1, 2)
+plt.bar(np.arange(n_classes) - 0.5, factor)
